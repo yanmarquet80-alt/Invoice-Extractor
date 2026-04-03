@@ -212,8 +212,18 @@
         companies.forEach(c => select.add(new Option(c, c)));
       }
       select.add(new Option('➕  Nouvelle société…', '__new__'));
+
+      // Si aucune société existante, forcer l'affichage du champ texte
+      if (companies.length === 0) {
+        select.value = '__new__';
+        nouveauDiv.style.display = 'block';
+        nouveauNom.required = true;
+      }
     } catch {
       select.innerHTML = '<option value="__new__">➕  Nouvelle société (hors ligne)</option>';
+      select.value = '__new__';
+      nouveauDiv.style.display = 'block';
+      nouveauNom.required = true;
     }
   }
   loadCompanies();
